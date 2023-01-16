@@ -36,7 +36,7 @@ export class EmployeesComponent implements OnInit {
     this.employees$.next(employees);
   }
 
-  public deleteValue(id: number): void {
+  public deleteEmployee(id: number): void {
     this.apiSubscription = this.employeesService.delete(id).subscribe({
       next: () => {
         const employees = this.employees$.getValue();
