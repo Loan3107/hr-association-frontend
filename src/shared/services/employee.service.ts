@@ -20,4 +20,8 @@ export class EmployeeService {
     public getEmployees(): Observable<Employees[]> {
         return this.http.get<Employees[]>(`${this.configUrl}/employees`, this.httpOptions);
     }
+
+    public delete(id: number): Observable<void> {
+        return this.http.delete<void>(`${this.configUrl}/employees/${id}`, this.httpOptions);
+    }
 }
