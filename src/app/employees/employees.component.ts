@@ -29,23 +29,11 @@ export class EmployeesComponent implements OnInit {
     );
   }
 
-  public addValue(): void {
-    this.employees$.next([
-        {
-          id: 1,
-          firstName: "Loan",
-          lastName: "PIROTAIS",
-          mail: "loan.pirotais@cgi.com",
-          password: "toto"
-        },
-        {
-          id: 2,
-          firstName: "Marion",
-          lastName: "CADIEU",
-          mail: "marioncadieu15@gmail.com",
-          password: "toto"
-        },
-    ]);
+  public addEmployee(employee: Employees): void {
+    const employees = this.employees$.getValue();
+    employees.push(employee);
+
+    this.employees$.next(employees);
   }
 
   public deleteValue(id: number): void {
