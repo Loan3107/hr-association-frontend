@@ -1,6 +1,8 @@
 <div class="container">
-    <div class="employees__div__right">
-        <button class="btn employees__button employees__button__add" (click)="addValue()">Ajouter</button>
+    <div class="employees__div__right mb-3">
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#employeesModal">
+            Ajouter
+        </button>
     </div>
 
     <table class=" table table-secondary table-striped">
@@ -18,11 +20,26 @@
                 <td>{{ employee.lastName }}</td>
                 <td>{{ employee.mail }}</td>
                 <td>
-                    <button class="btn employees__button employees__button__delete" (click)="deleteValue(employee.id)">
+                    <button class="btn btn-danger" (click)="deleteValue(employee.id)">
                         Supprimer
                     </button>
                 </td>
             </tr> 
         </tbody>
     </table>
+</div>
+
+<div class="modal fade" id="employeesModal" tabindex="-1" aria-labelledby="employeesModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="employeesModalLabel">Ajout d'un employé</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+            </div>
+
+            <div class="modal-body">
+                <app-employees-form (submitEvent)="addEmployee($event)"></app-employees-form>
+            </div>
+        </div>
+    </div>
 </div>
