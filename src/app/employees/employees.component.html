@@ -15,16 +15,23 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let employee of employees$.getValue()">
-                <td>{{ employee.firstName }}</td>
-                <td>{{ employee.lastName }}</td>
-                <td>{{ employee.mail }}</td>
-                <td>
-                    <button class="btn btn-danger" (click)="deleteEmployee(employee.id)">
-                        Supprimer
-                    </button>
+            <tr *ngIf="employees$.getValue().length === 0; else employeesListBlock">
+                <td colspan="4" class="text-center">
+                    Auncun employé.
                 </td>
-            </tr> 
+            </tr>
+            <ng-template #employeesListBlock>
+                <tr *ngFor="let employee of employees$.getValue()">
+                    <td>{{ employee.firstName }}</td>
+                    <td>{{ employee.lastName }}</td>
+                    <td>{{ employee.mail }}</td>
+                    <td>
+                        <button class="btn btn-danger" (click)="deleteEmployee(employee.id)">
+                            Supprimer
+                        </button>
+                    </td>
+                </tr> 
+            </ng-template>
         </tbody>
     </table>
 </div>
