@@ -1,0 +1,23 @@
+<form [formGroup]="employeesForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+        <label for="firstName" class="form-label">Prénom</label>
+        <input class="form-control" type="text" id="firstName" formControlName="firstName">
+    </div>
+
+    <div class="mb-3">
+        <label for="lastName" class="form-label">Nom</label>
+        <input class="form-control" type="text" id="lastName" formControlName="lastName">
+    </div>
+
+    <div class="mb-3">
+        <label for="mail" class="form-label">Adresse e-mail</label>
+        <input class="form-control" type="text" id="mail" formControlName="mail">
+    </div>
+    
+    <div class="mb-3">
+        <label for="password" class="form-label">Mot de passe</label>
+        <input class="form-control" type="password" id="password" formControlName="password">
+    </div>
+
+    <button type="submit" class="btn btn-success" data-bs-dismiss="modal" [disabled]="!employeesForm.valid">Ajouter</button>
+</form>
