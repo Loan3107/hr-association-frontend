@@ -18,7 +18,7 @@
                 <td>{{ employee.lastName }}</td>
                 <td>{{ employee.mail }}</td>
                 <td>
-                    <button class="btn employees__button employees__button__delete" (click)="deleteValue()">
+                    <button class="btn employees__button employees__button__delete" (click)="deleteValue(employee.id)">
                         Supprimer
                     </button>
                 </td>

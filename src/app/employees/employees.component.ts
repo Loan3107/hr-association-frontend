@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { isNil } from 'lodash';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { Employees } from 'src/shared/entities/employees.entity';
 import { EmployeeService } from 'src/shared/services/employee.service';
@@ -47,16 +48,18 @@ export class EmployeesComponent implements OnInit {
     ]);
   }
 
-  public deleteValue(): void {
-    this.employees$.next([
-        {
-          id: 1,
-          firstName: "Loan",
-          lastName: "PIROTAIS",
-          mail: "loan.pirotais@cgi.com",
-          password: "toto"
-        },
-    ]);
+  public deleteValue(id: number): void {
+    this.apiSubscription = this.employeesService.delete(id).subscribe({
+      next: () => {
+        const employees = this.employees$.getValue();
+        const employeeToDelete = employees.find(x => x.id === id);
+        if (!isNil(employeeToDelete)) employees.splice(employees.indexOf(employeeToDelete), 1);
+         this.employees$.next(employees);
+      },
+      complete: () => {
+        this.apiSubscription.unsubscribe();
+      }
+    })
   }
 
   private refreshEmployees(data:Employees[]): void {
