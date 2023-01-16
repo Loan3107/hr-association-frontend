@@ -1,0 +1,8 @@
+<div *ngFor="let employee of employees$.getValue()">
+    <p>{{ employee.firstName }}</p>
+    <p>{{ employee.lastName }}</p>
+    <p>{{ employee.mail }}</p>
+</div>
+
+<button (click)="addValue()">Ajouter</button>
+<button (click)="deleteValue()">Supprimer</button>
