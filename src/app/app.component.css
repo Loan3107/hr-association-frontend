@@ -1,3 +1,7 @@
 .app__navbar {
+    margin-bottom: 50px;
+}
+
+.app__navbar__navbar-brand {
     color: white;
 }

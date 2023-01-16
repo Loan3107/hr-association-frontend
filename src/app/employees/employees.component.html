@@ -1,14 +1,28 @@
 <div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <div *ngFor="let employee of employees$.getValue()">
-                <p>{{ employee.firstName }}</p>
-                <p>{{ employee.lastName }}</p>
-                <p>{{ employee.mail }}</p>
-            </div>            
-        </div>
+    <div class="employees__div__right">
+        <button class="btn employees__button employees__button__add" (click)="addValue()">Ajouter</button>
     </div>
 
-    <button (click)="addValue()">Ajouter</button>
-    <button (click)="deleteValue()">Supprimer</button>
+    <table class=" table table-secondary table-striped">
+        <thead>
+            <tr>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Adresse e-mail</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let employee of employees$.getValue()">
+                <td>{{ employee.firstName }}</td>
+                <td>{{ employee.lastName }}</td>
+                <td>{{ employee.mail }}</td>
+                <td>
+                    <button class="btn employees__button employees__button__delete" (click)="deleteValue()">
+                        Supprimer
+                    </button>
+                </td>
+            </tr> 
+        </tbody>
+    </table>
 </div>
