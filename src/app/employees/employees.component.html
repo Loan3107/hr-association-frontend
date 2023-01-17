@@ -47,16 +47,28 @@
     </table>
 </div>
 
-<div class="modal fade" id="employeesModal" tabindex="-1" aria-labelledby="employeesModalLabel" aria-hidden="true">
+<div 
+    id="employeesModal"
+    class="modal fade"
+    aria-hidden="true"
+    aria-labelledby="employeesModalLabel"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="employeesModalLabel">Ajout d'un employé</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                <button
+                    class="btn-close"
+                    type="button"
+                    aria-label="close"
+                    data-bs-dismiss="modal"
+                    (click)="onClose()"></button>
             </div>
 
             <div class="modal-body">
-                <app-employees-form [employeeToHandle]="employeeToHandle$.getValue()" (submitEvent)="saveEmployee($event)"></app-employees-form>
+                <app-employees-form #employeesForm [employeeToHandle]="employeeToHandle$.getValue()" (submitEvent)="saveEmployee($event)"></app-employees-form>
             </div>
         </div>
     </div>

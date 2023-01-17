@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { isNil } from 'lodash';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { Employees } from 'src/shared/entities/employees.entity';
 import { EmployeeService } from 'src/shared/services/employee.service';
+import { EmployeesFormComponent } from './employees-form/employees-form.component';
 
 @Component({
   selector: 'app-employees',
@@ -10,6 +11,9 @@ import { EmployeeService } from 'src/shared/services/employee.service';
   styleUrls: ['./employees.component.css']
 })
 export class EmployeesComponent implements OnInit {
+  @ViewChild('employeesForm')
+  public form!: EmployeesFormComponent;
+
   public employeeToHandle$ = new BehaviorSubject<Employees | undefined>(undefined);
 
   public employees$ = new BehaviorSubject<Employees[]>([] as Employees[]);
@@ -49,6 +53,10 @@ export class EmployeesComponent implements OnInit {
     this.employeeToHandle$.next(undefined);
   }
 
+  public onClose(): void {
+    this.form.employeesForm.reset();
+  }
+
   public onUpdate(employee: Employees): void {
     this.employeeToHandle$.next(employee);
   }
@@ -60,6 +68,7 @@ export class EmployeesComponent implements OnInit {
     if (!isNil(employeeToHandle)) employees.splice(employees.indexOf(employeeToHandle), 1, employee);
     else employees.push(employee);
 
+    this.form.employeesForm.reset();
     this.employeeToHandle$.next(undefined);
     this.employees$.next(employees);
   }
