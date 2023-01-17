@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { environment } from "../environments/environment";
 import { Employees } from "../entities/employees.entity";
 import { CreateEmployeeDto } from "../dtos/create-employee.dto";
+import { PutEmployeeDto } from "../dtos/put-employee.dto";
 
 @Injectable({
     providedIn: 'root'
@@ -24,6 +25,10 @@ export class EmployeeService {
 
     public create(employee: CreateEmployeeDto): Observable<Employees> {
         return this.http.post<Employees>(`${this.configUrl}/employees`, employee, this.httpOptions);
+    }
+
+    public put(id: number, employee: PutEmployeeDto): Observable<Employees> {
+        return this.http.put<Employees>(`${this.configUrl}/employees/${id}`, employee, this.httpOptions);
     }
 
     public delete(id: number): Observable<void> {
