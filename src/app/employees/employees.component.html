@@ -1,6 +1,10 @@
 <div class="container">
     <div class="employees__div__right mb-3">
-        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#employeesModal">
+        <button
+            class="btn btn-success"
+            data-bs-toggle="modal"
+            data-bs-target="#employeesModal"
+            (click)="onAdd()">
             Ajouter
         </button>
     </div>
@@ -26,6 +30,13 @@
                     <td>{{ employee.lastName }}</td>
                     <td>{{ employee.mail }}</td>
                     <td>
+                        <button
+                            class="btn btn-warning employees__btn-warning"
+                            data-bs-toggle="modal"
+                            data-bs-target="#employeesModal"
+                            (click)="onUpdate(employee)">
+                            Modifier
+                        </button>
                         <button class="btn btn-danger" (click)="deleteEmployee(employee.id)">
                             Supprimer
                         </button>
@@ -45,7 +56,7 @@
             </div>
 
             <div class="modal-body">
-                <app-employees-form (submitEvent)="addEmployee($event)"></app-employees-form>
+                <app-employees-form [employeeToHandle]="employeeToHandle$.getValue()" (submitEvent)="saveEmployee($event)"></app-employees-form>
             </div>
         </div>
     </div>

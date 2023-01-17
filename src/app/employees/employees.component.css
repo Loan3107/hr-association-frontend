@@ -1,3 +1,8 @@
+.employees__btn-warning {
+    color: white;
+    margin-right: 5px;
+}
+
 .employees__div__right {
     display: flex;
     justify-content: end;

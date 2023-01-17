@@ -10,6 +10,8 @@ import { EmployeeService } from 'src/shared/services/employee.service';
   styleUrls: ['./employees.component.css']
 })
 export class EmployeesComponent implements OnInit {
+  public employeeToHandle$ = new BehaviorSubject<Employees | undefined>(undefined);
+
   public employees$ = new BehaviorSubject<Employees[]>([] as Employees[]);
   private apiSubscription!: Subscription;
   
@@ -29,13 +31,6 @@ export class EmployeesComponent implements OnInit {
     );
   }
 
-  public addEmployee(employee: Employees): void {
-    const employees = this.employees$.getValue();
-    employees.push(employee);
-
-    this.employees$.next(employees);
-  }
-
   public deleteEmployee(id: number): void {
     this.apiSubscription = this.employeesService.delete(id).subscribe({
       next: () => {
@@ -48,6 +43,25 @@ export class EmployeesComponent implements OnInit {
         this.apiSubscription.unsubscribe();
       }
     })
+  }
+
+  public onAdd(): void {
+    this.employeeToHandle$.next(undefined);
+  }
+
+  public onUpdate(employee: Employees): void {
+    this.employeeToHandle$.next(employee);
+  }
+
+  public saveEmployee(employee: Employees): void {
+    const employees = this.employees$.getValue();
+    const employeeToHandle = employees.find(x => x.id === employee.id);
+    
+    if (!isNil(employeeToHandle)) employees.splice(employees.indexOf(employeeToHandle), 1, employee);
+    else employees.push(employee);
+
+    this.employeeToHandle$.next(undefined);
+    this.employees$.next(employees);
   }
 
   private refreshEmployees(data:Employees[]): void {
