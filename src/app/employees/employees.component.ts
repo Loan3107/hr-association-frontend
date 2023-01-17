@@ -54,7 +54,10 @@ export class EmployeesComponent implements OnInit {
   }
 
   public onClose(): void {
-    this.form.employeesForm.reset();
+    const employee = this.employeeToHandle$.getValue();
+
+    if (isNil(employee)) this.form.employeesForm.reset();
+    else this.form.employeesForm.reset({ firstName: employee.firstName, lastName: employee.lastName, mail: employee.mail, password: employee.password });
   }
 
   public onUpdate(employee: Employees): void {
